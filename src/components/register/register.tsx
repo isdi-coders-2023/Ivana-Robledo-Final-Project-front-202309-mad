@@ -31,7 +31,7 @@ export function Register() {
     <>
       <h2>Registro</h2>
       {!hasRegister && (
-        <form onSubmit={handleSubmit} className={registerForm}>
+        <form onSubmit={handleSubmit} className={registerForm} role="form">
           <input type="text" name="username" placeholder="Nombre de usuario" />
           <input type="email" name="email" placeholder="Email" required />
           <input
