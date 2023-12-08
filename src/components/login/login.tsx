@@ -1,12 +1,10 @@
-import { SyntheticEvent } from 'react';
-import { LoginUser } from '../../entities/user';
+import { SyntheticEvent, useState } from 'react';
 import { useUsers } from '../../hooks/users.hook';
-import { loginForm } from './login.module.scss';
+import { LoginUser } from '../../entities/user';
+import { Link } from 'react-router-dom';
 
-type Props = {
-  closeModal: () => void;
-};
-export function Login({ closeModal }: Props) {
+export function Login() {
+  const [hasLogin, setHasLogin] = useState(false);
   const { login } = useUsers();
 
   const handleSubmit = (event: SyntheticEvent) => {
@@ -15,23 +13,37 @@ export function Login({ closeModal }: Props) {
     const formData = new FormData(formElement);
     const loginUser: LoginUser = {
       email: formData.get('email')?.toString() as string,
-      passwd: formData.get('password')?.toString() as string,
+      passwd: formData.get('passwd')?.toString() as string,
     };
     login(loginUser);
-    closeModal();
+    setHasLogin(true);
   };
 
   return (
     <>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} className={loginForm}>
-        <input type="email" name="email" placeholder="email" />
-        <input type="password" name="password" placeholder="password" />
-        <button type="submit">Login</button>
-        <button type="button" onClick={closeModal}>
-          Cancelar
-        </button>
-      </form>
+      {!hasLogin && (
+        <form onSubmit={handleSubmit} className="login-form">
+          <input type="email" name="email" placeholder="Email" required />
+          <input
+            type="password"
+            name="passwd"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">LOGIN</button>
+          <div className="cancel-button">
+            <Link to={'/'}>
+              <button type="button">CANCEL</button>
+            </Link>
+          </div>
+        </form>
+      )}
+      {hasLogin && (
+        <div>
+          <p>SUCESS</p>
+        </div>
+      )}
     </>
   );
 }

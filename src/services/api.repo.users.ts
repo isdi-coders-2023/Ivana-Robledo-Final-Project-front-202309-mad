@@ -2,7 +2,7 @@ import { serverUrl } from '../config';
 import { LoginUser, User } from '../entities/user';
 import { LoginResponse } from '../types/login.response';
 
-export class ApirepoUsers {
+export class ApiRepoUsers {
   apiUrl = serverUrl + '/users';
 
   async getUsers(): Promise<User[]> {
@@ -12,11 +12,12 @@ export class ApirepoUsers {
     return response.json();
   }
 
-  async register(newUser: FormData): Promise<User> {
+  async register(newUser: Partial<User>): Promise<User> {
     const url = this.apiUrl + '/register';
     const response = await fetch(url, {
       method: 'POST',
-      body: newUser,
+      body: JSON.stringify(newUser),
+      headers: { 'Content-Type': 'application/json' },
     });
     if (!response.ok)
       throw new Error(response.status + ' ' + response.statusText);
@@ -36,17 +37,4 @@ export class ApirepoUsers {
       throw new Error(response.status + ' ' + response.statusText);
     return response.json();
   }
-  /* 
-  Async loginWithToken(token: string): Promise<LoginResponse> {
-    const url = this.apiUrl + '/login';
-    const response = await fetch(url, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (!response.ok)
-      throw new Error(response.status + ' ' + response.statusText);
-    return response.json();
-  } */
 }

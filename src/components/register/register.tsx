@@ -1,47 +1,45 @@
 import { SyntheticEvent, useState } from 'react';
 import { useUsers } from '../../hooks/users.hook';
 import { registerForm } from './register.module.scss';
+import { User } from '../../entities/user';
 
-type Props = {
-  closeModal: () => void;
-};
-export function Register({ closeModal }: Props) {
+export function Register() {
   const [hasRegister, setHasRegister] = useState(false);
   const { register } = useUsers();
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
-    const formData = new FormData(formElement);
-    register(formData);
+    const data = {
+      username: (formElement.elements.namedItem('username') as HTMLInputElement)
+        .value,
+      email: (formElement.elements.namedItem('email') as HTMLInputElement)
+        .value,
+      passwd: (formElement.elements.namedItem('passwd') as HTMLInputElement)
+        .value,
+    } as Partial<User>;
+    register(data);
     setHasRegister(true);
-    setTimeout(() => {
-      handleCloseOk();
-    }, 4000);
+    console.log(data.username);
   };
 
   const handleCloseOk = () => {
     setHasRegister(false);
-    closeModal();
   };
 
   return (
     <>
-      <h2>Register</h2>
+      <h2>Registro</h2>
       {!hasRegister && (
         <form onSubmit={handleSubmit} className={registerForm}>
-          <input type="text" name="name" placeholder="Nombre" />
-          <input type="text" name="surname" placeholder="Apellido" />
-          <input type="email" name="email" placeholder="email" required />
+          <input type="text" name="username" placeholder="Nombre de usuario" />
+          <input type="email" name="email" placeholder="Email" required />
           <input
             type="password"
             name="passwd"
-            placeholder="password"
+            placeholder="Contraseña"
             required
           />
-          <input type="number" name="age" placeholder="edad" />
-          <label htmlFor="avatar">Avatar</label>
-          <input type="file" name="avatar" placeholder="avatar" />
           <button type="submit">Registrar</button>
           <button type="button">Cancelar</button>
         </form>

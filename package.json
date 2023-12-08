@@ -1,7 +1,7 @@
 {
-  "name": "202309-w7ch5-ivana-speziale",
+  "name": "202309-w9ch1-ivana-speziale",
   "version": "1.0.0",
-  "description": "Week 7 del Bootcamp, challenge backend",
+  "description": "Proyecto final Bootcamp, challenge backend",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "test": "jest --watchAll --coverage",
     "build:render": "tsc",
+    "build:ts": "tsc && vite build -w",
     "preview": "vite preview",
     "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTests",
     "test:w": "jest --watchAll --coverage --collectCoverageFrom=src/**/*.{ts,tsx}",

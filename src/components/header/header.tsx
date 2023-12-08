@@ -1,10 +1,16 @@
-import { UserButtons } from '../user.buttons/user.buttons';
-import { header } from './header.module.scss';
+import { LogoutButton } from '../logoutButton/logout.button';
+import styles from './header.module.scss';
+
 export function Header() {
   return (
-    <header className={header}>
-      <h1>Friends 2B Friends</h1>
-      <UserButtons></UserButtons>
+    <header className={styles.header}>
+      <div className={styles.logotipo}>
+        <img src="logo.png" alt="Logo de galleta" width={50} />
+        <h1>Sugar spells</h1>
+      </div>
+      <div className={styles.headerButtons}>
+        <LogoutButton></LogoutButton>
+      </div>
     </header>
   );
 }

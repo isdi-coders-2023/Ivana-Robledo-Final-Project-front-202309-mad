@@ -1,19 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { User } from '../entities/user';
+
+import { loginThunk } from './users.thunk';
 import { LoginResponse } from '../types/login.response';
-import { loginThunk, loginTokenThunk } from './users.thunk';
 
-type LoginState = 'idle' | 'logging' | 'error';
+type LoginState = 'idle' | 'logging' | 'error' | 'logout';
 
-type UsersState = {
+export type UsersState = {
   loggedUser: User | null;
-  loginState: LoginState;
-  token: string;
+  loginLoadState: LoginState;
+  token: string | null;
 };
 
 const initialState: UsersState = {
   loggedUser: null,
-  loginState: 'idle',
+  loginLoadState: 'idle',
   token: '',
 };
 
@@ -21,39 +22,41 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
+    setToken(state, action) {
+      state.token = action.payload;
+    },
+    clearToken(state) {
+      state.token = null;
+    },
     logout(state: UsersState) {
       state.loggedUser = null;
-      state.token = '';
-
-      return state;
+      state.token = null;
     },
   },
-  // eslint-disable-next-line object-shorthand
-  extraReducers: (builder) => {
+
+  extraReducers(builder) {
     builder.addCase(loginThunk.pending, (state: UsersState) => {
-      state.loginState = 'logging';
+      state.loginLoadState = 'logging';
     });
-
     builder.addCase(loginThunk.rejected, (state: UsersState) => {
-      state.loginState = 'error';
-    });
+      console.log('Login rejected', state);
+      state.loginLoadState = 'error';
+      state.loggedUser = null;
+      state.token = null;
 
+      return state;
+    });
     builder.addCase(
       loginThunk.fulfilled,
       (state: UsersState, { payload }: PayloadAction<LoginResponse>) => {
         state.loggedUser = payload.user;
-        state.token = payload.token;
-      }
-    );
-
-    builder.addCase(
-      loginTokenThunk.fulfilled,
-      (state: UsersState, { payload }: PayloadAction<LoginResponse>) => {
-        state.loggedUser = payload.user;
+        state.loginLoadState = 'idle';
         state.token = payload.token;
       }
     );
   },
 });
-export const ac = usersSlice.actions;
+
 export default usersSlice.reducer;
+export const ac = usersSlice.actions;
+export const { setToken, clearToken, logout } = usersSlice.actions;
