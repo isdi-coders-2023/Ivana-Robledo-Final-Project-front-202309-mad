@@ -23,7 +23,7 @@ export function Login() {
     <>
       <h2>Login</h2>
       {!hasLogin && (
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit} className="login-form" role="form">
           <input type="email" name="email" placeholder="Email" required />
           <input
             type="password"
@@ -31,7 +31,9 @@ export function Login() {
             placeholder="Password"
             required
           />
-          <button type="submit">LOGIN</button>
+          <button className="submit-button" type="submit" role="button">
+            Iniciar sesión
+          </button>
           <div className="cancel-button">
             <Link to={'/'}>
               <button type="button">CANCEL</button>

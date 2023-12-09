@@ -39,7 +39,6 @@ const usersSlice = createSlice({
       state.loginLoadState = 'logging';
     });
     builder.addCase(loginThunk.rejected, (state: UsersState) => {
-      console.log('Login rejected', state);
       state.loginLoadState = 'error';
       state.loggedUser = null;
       state.token = null;
@@ -60,3 +59,4 @@ const usersSlice = createSlice({
 export default usersSlice.reducer;
 export const ac = usersSlice.actions;
 export const { setToken, clearToken, logout } = usersSlice.actions;
+export const { reducer, actions } = usersSlice;

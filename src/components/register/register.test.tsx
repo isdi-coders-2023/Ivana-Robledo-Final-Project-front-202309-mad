@@ -49,13 +49,10 @@ describe('Given Register component', () => {
       await userEvent.click(screen.getAllByRole('button')[0]);
       await fireEvent.submit(screen.getByRole('form'));
 
-      // Verificar que el mensaje de éxito esté presente después de enviar el formulario
       expect(screen.getByText('Registrado correctamente')).toBeInTheDocument();
 
-      // Simular hacer clic en el botón "Continuar"
       await userEvent.click(screen.getByText('Continuar'));
 
-      // Verificar que el mensaje de éxito ya no esté presente
       expect(
         screen.queryByText('Registrado correctamente')
       ).not.toBeInTheDocument();
