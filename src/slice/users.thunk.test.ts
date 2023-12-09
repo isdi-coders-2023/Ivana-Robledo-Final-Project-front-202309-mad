@@ -1,4 +1,4 @@
-import { User } from '../entities/user';
+import { LoginUser, User } from '../entities/user';
 import { ApiRepoUsers } from '../services/api.repo.users';
 import { appStore } from '../store/store';
 import { LoginResponse } from '../types/login.response';
@@ -13,7 +13,7 @@ describe('Given loginThunk', () => {
   describe('When we dispatch succesfully', () => {
     test('Then it should dispatch', async () => {
       await appStore.dispatch(
-        loginThunk({ repo: mockedRepo, loginUser: {} as Partial<User> })
+        loginThunk({ repo: mockedRepo, loginUser: {} as LoginUser })
       );
       expect(mockedRepo.login).toHaveBeenCalled();
     });

@@ -1,4 +1,4 @@
-import { User } from '../entities/user.js';
+import { LoginUser, User } from '../entities/user.js';
 import { ApiRepoUsers } from './api.repo.users.js';
 
 describe('Given ApiRepoClass', () => {
@@ -15,7 +15,7 @@ describe('Given ApiRepoClass', () => {
     const repo = new ApiRepoUsers();
 
     test('Then the method userLogin should be used', async () => {
-      const result = await repo.login({} as Partial<User>);
+      const result = await repo.login({} as LoginUser);
       expect(jsonMock).toHaveBeenCalled();
       expect(result).toStrictEqual({});
     });

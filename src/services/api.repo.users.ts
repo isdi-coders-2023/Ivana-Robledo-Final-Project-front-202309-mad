@@ -1,5 +1,5 @@
 import { serverUrl } from '../config';
-import { User } from '../entities/user';
+import { LoginUser, User } from '../entities/user';
 import { LoginResponse } from '../types/login.response';
 
 export class ApiRepoUsers {
@@ -24,7 +24,7 @@ export class ApiRepoUsers {
     return response.json();
   }
 
-  async login(loginUser: Partial<User>): Promise<LoginResponse> {
+  async login(loginUser: LoginUser): Promise<LoginResponse> {
     const url = this.apiUrl + '/login';
     const response = await fetch(url, {
       method: 'POST',

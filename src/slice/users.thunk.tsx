@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginResponse } from '../types/login.response';
-import { User } from '../entities/user';
+import { LoginUser, User } from '../entities/user';
 import { ApiRepoUsers } from '../services/api.repo.users';
 import { logout, setToken } from './users.slice';
 
 export const loginThunk = createAsyncThunk<
   LoginResponse,
-  { loginUser: Partial<User> /* LoginUser */; repo: ApiRepoUsers }
+  { loginUser: LoginUser; repo: ApiRepoUsers }
 >('users/login', async ({ loginUser, repo }, { dispatch }) => {
   const loginResponse = await repo.login(loginUser);
   dispatch(setToken(loginResponse.token));
