@@ -1,0 +1,22 @@
+.header {
+  height: 15vh;
+  background-color: #50b6bc;
+  color: azure;
+  padding-inline: 1rem;
+  min-height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logotipo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+h1 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  color: white;
+}
