@@ -5,17 +5,19 @@ import { loginThunk, registerThunk } from './users.thunk';
 import { LoginResponse } from '../types/login.response';
 
 type LoginState = 'idle' | 'logging' | 'error' | 'logout';
-
+type RegistrationStatus = 'registered' | null;
 export type UsersState = {
   loggedUser: User | null;
   loginLoadState: LoginState;
   token: string | null;
+  registrationStatus: RegistrationStatus;
 };
 
 const initialState: UsersState = {
   loggedUser: null,
   loginLoadState: 'idle',
   token: '',
+  registrationStatus: 'registered',
 };
 
 const usersSlice = createSlice({
@@ -53,8 +55,8 @@ const usersSlice = createSlice({
         state.token = payload.token;
       }
     );
-    builder.addCase(registerThunk.fulfilled, () => {
-      console.log('Registered');
+    builder.addCase(registerThunk.fulfilled, (state) => {
+      state.registrationStatus = 'registered';
     });
   },
 });
