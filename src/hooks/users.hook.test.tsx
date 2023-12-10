@@ -1,43 +1,63 @@
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 import { LoginUser, User } from '../entities/user';
-import { ApiRepoUsers } from '../services/api.repo.users';
 import { useUsers } from './users.hook';
-import { renderHook } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { appStore } from '../store/store';
+import { Provider, useDispatch } from 'react-redux';
+import userEvent from '@testing-library/user-event';
+import { ApiRepoUsers } from '../services/api.repo.users';
 
 jest.mock('react-redux', () => ({
-  useDispatch: jest.fn(),
+  ...jest.requireActual('react-redux'),
+  useDispatch: jest.fn().mockReturnValue(jest.fn()),
 }));
-const mockRepo = {
-  register: jest.fn().mockResolvedValue({}),
-} as unknown as ApiRepoUsers;
-describe('Given useUsers hook', () => {
-  describe('when we execute login', () => {
-    test('then dispatch should be called ', () => {
-      const dispatch = jest.fn();
-      (useDispatch as jest.Mock).mockReturnValue(dispatch);
 
-      const { result } = renderHook(() => useUsers());
+const mockLoginUser = {} as LoginUser;
+const mockNewUser = {} as Partial<User>;
 
-      const { login } = result.current;
+describe('Given user Hook', () => {
+  const TestComponents = () => {
+    const { login, logout, register } = useUsers();
 
-      login({} as LoginUser);
+    return (
+      <>
+        <button onClick={() => logout()}></button>
+        <button onClick={() => login(mockLoginUser)}></button>
+        <button onClick={() => register(mockNewUser)}></button>
+      </>
+    );
+  };
 
-      expect(dispatch).toHaveBeenCalled();
+  let elements: HTMLElement[];
+
+  beforeEach(() => {
+    render(
+      <Provider store={appStore}>
+        <TestComponents></TestComponents>
+      </Provider>
+    );
+    elements = screen.getAllByRole('button');
+  });
+
+  describe('When an user logout', () => {
+    test('Then the dispatch should have been called', async () => {
+      await userEvent.click(elements[0]);
+      expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
-  describe('when we execute register', () => {
-    test.only('then dispatch should be called ', () => {
-      const dispatch = jest.fn();
-      (useDispatch as jest.Mock).mockReturnValue(dispatch);
+  describe('When an user login', () => {
+    test('Then the dispatch should have been called', async () => {
+      await userEvent.click(elements[1]);
+      expect(useDispatch()).toHaveBeenCalled();
+    });
+  });
 
-      const { result } = renderHook(() => useUsers());
-
-      const { register } = result.current;
-
-      register({} as Partial<User>);
-      expect(mockRepo.register).toHaveBeenCalledWith({} as Partial<User>);
-      expect(dispatch).toHaveBeenCalled();
+  describe('When an user register', () => {
+    test('Then the dispatch should have been called', async () => {
+      ApiRepoUsers.prototype.register = jest.fn();
+      await userEvent.click(elements[2]);
+      expect(useDispatch()).toHaveBeenCalled();
     });
   });
 });

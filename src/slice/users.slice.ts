@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { User } from '../entities/user';
 
-import { loginThunk } from './users.thunk';
+import { loginThunk, registerThunk } from './users.thunk';
 import { LoginResponse } from '../types/login.response';
 
 type LoginState = 'idle' | 'logging' | 'error' | 'logout';
@@ -53,6 +53,9 @@ const usersSlice = createSlice({
         state.token = payload.token;
       }
     );
+    builder.addCase(registerThunk.fulfilled, () => {
+      console.log('Registered');
+    });
   },
 });
 

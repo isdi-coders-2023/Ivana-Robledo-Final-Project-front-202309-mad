@@ -7,7 +7,7 @@ import { loginThunk, logoutThunk, registerThunk } from './users.thunk';
 describe('Given loginThunk', () => {
   const mockedRepo = {
     login: jest.fn().mockReturnValue({} as LoginResponse),
-    userRegister: jest.fn().mockReturnValue({} as User),
+    register: jest.fn().mockReturnValue({} as User),
   } as unknown as ApiRepoUsers;
 
   describe('When we dispatch succesfully', () => {

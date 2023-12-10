@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiRepoUsers } from '../services/api.repo.users';
-import { loginThunk } from '../slice/users.thunk';
+import { loginThunk, registerThunk } from '../slice/users.thunk';
 import { LoginUser, User } from '../entities/user';
 import { ac } from '../slice/users.slice';
 import { AppDispatch, RootState } from '../store/store';
@@ -10,8 +10,9 @@ export function useUsers() {
   const repo = new ApiRepoUsers();
   const { loggedUser } = useSelector((state: RootState) => state.UsersState);
 
-  const register = (newUser: Partial<User>) => {
-    repo.register(newUser);
+  const register = (userToRegister: Partial<User>) => {
+    console.log('Desde el hook userToRegister:', userToRegister);
+    dispatch(registerThunk({ repo, registerUser: userToRegister }));
   };
 
   const login = (loginUser: LoginUser) => {

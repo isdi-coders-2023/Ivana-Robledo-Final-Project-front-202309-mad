@@ -46,4 +46,18 @@ describe('Given userSlice', () => {
       expect(newState.token).toBe(null);
     });
   });
+  describe('When we call slice and it is rejected', () => {
+    test('Then if loginLoadState is error it should set loggedUser to null and token to null', (): void => {
+      const currentState: UsersState = {
+        loggedUser: {} as User,
+        loginLoadState: 'error',
+        token: 'someToken',
+      };
+
+      const newState = usersSlice(currentState, logout());
+
+      expect(newState.loggedUser).toBe(null);
+      expect(newState.token).toBe(null);
+    });
+  });
 });

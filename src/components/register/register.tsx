@@ -20,7 +20,6 @@ export function Register() {
     } as Partial<User>;
     register(data);
     setHasRegister(true);
-    console.log(data.username);
   };
 
   const handleCloseOk = () => {
