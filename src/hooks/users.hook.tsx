@@ -18,7 +18,6 @@ export function useUsers() {
 
   const login = (loginUser: LoginUser) => {
     dispatch(loginThunk({ repo, loginUser }));
-    console.log('login from hook ', loginUser, repo);
   };
 
   const logout = () => {

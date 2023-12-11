@@ -28,8 +28,8 @@ describe('Given LogoutButton component', () => {
   describe('When click on it', () => {
     test('Then it should render logout button and triggers logout function on click', async () => {
       const logoutButton = screen.getByRole('button');
-      expect(logoutButton).toBeInTheDocument();
       await userEvent.click(logoutButton);
+      expect(logoutButton).toBeInTheDocument();
       expect(useUsers().logout).toHaveBeenCalled();
     });
   });
