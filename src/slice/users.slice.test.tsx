@@ -80,7 +80,7 @@ describe('Given userSlice', () => {
 
       expect(newState.loggedUser).toEqual(user);
       expect(newState.token).toBe(token);
-      expect(newState.loginLoadState).toBe('idle');
+      expect(newState.loginLoadState).toBe('logged');
     });
   });
 
