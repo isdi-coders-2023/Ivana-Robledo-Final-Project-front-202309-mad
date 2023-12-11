@@ -1,15 +1,15 @@
+import { AppRoutes } from '../app.routes/app.routes';
+import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
-import { Login } from '../login/login';
-import { LogoutButton } from '../logoutButton/logout.button';
-import { Register } from '../register/register';
-
+import styles from './app.module.scss';
 export function App() {
   return (
     <main>
       <Header></Header>
-      <Register></Register>
-      <Login></Login>
-      <LogoutButton></LogoutButton>
+      <div className={styles['main-div']}>
+        <AppRoutes></AppRoutes>
+      </div>
+      <Footer></Footer>
     </main>
   );
 }
