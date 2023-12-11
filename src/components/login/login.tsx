@@ -31,14 +31,16 @@ export function Login() {
             placeholder="Password"
             required
           />
+
           <button className="submit-button" type="submit" role="button">
             Iniciar sesión
           </button>
-          <div className="cancel-button">
-            <Link to={'/'}>
+
+          {/* <div className="cancel-button">
+            <Link to={'/login'}>
               <button type="button">CANCEL</button>
             </Link>
-          </div>
+          </div> */}
           <p>No estás registrado?</p>
           <div className="register-link-button">
             <Link to={'/register'}>

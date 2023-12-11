@@ -41,7 +41,11 @@ export function Register() {
             required
           />
           <button type="submit">Registrar</button>
-          <button type="button">Cancelar</button>
+          <div className="cancel-button">
+            <Link to={'/login'}>
+              <button type="button">CANCEL</button>
+            </Link>
+          </div>
         </form>
       )}
       {hasRegister && (
