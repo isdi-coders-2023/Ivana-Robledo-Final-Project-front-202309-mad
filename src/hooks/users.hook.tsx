@@ -8,19 +8,21 @@ import { AppDispatch, RootState } from '../store/store';
 export function useUsers() {
   const dispatch = useDispatch<AppDispatch>();
   const repo = new ApiRepoUsers();
-  const { loggedUser } = useSelector((state: RootState) => state.UsersState);
+  const { loggedUser, loginLoadState } = useSelector(
+    (state: RootState) => state.UsersState
+  );
 
   const register = (userToRegister: Partial<User>) => {
-    console.log('Desde el hook userToRegister:', userToRegister);
     dispatch(registerThunk({ repo, registerUser: userToRegister }));
   };
 
   const login = (loginUser: LoginUser) => {
-    dispatch(loginThunk({ loginUser, repo }));
+    dispatch(loginThunk({ repo, loginUser }));
   };
 
   const logout = () => {
     dispatch(ac.logout());
+    window.location.reload();
   };
 
   return {
@@ -28,5 +30,6 @@ export function useUsers() {
     login,
     logout,
     loggedUser,
+    loginLoadState,
   };
 }

@@ -1,20 +1,26 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from './app';
 import { appStore } from '../../store/store';
 import '@testing-library/jest-dom';
+import { AppRoutes } from '../app.routes/app.routes';
+import { Header } from '../header/header';
+import { Footer } from '../footer/footer';
 
 render(
   <Router>
     <Provider store={appStore}>
-      <App />
+      <Header></Header>
+      <div className="main-div">
+        <AppRoutes></AppRoutes>
+      </div>
+      <Footer></Footer>
     </Provider>
   </Router>
 );
 
 test('should ', () => {
-  const main = screen.getByRole('main');
+  const banner = screen.getByRole('banner');
 
-  expect(main).toBeInTheDocument();
+  expect(banner).toBeInTheDocument();
 });

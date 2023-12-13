@@ -4,7 +4,7 @@ import { User } from '../entities/user';
 import { loginThunk, registerThunk } from './users.thunk';
 import { LoginResponse } from '../types/login.response';
 
-type LoginState = 'idle' | 'logging' | 'error' | 'logout';
+type LoginState = 'idle' | 'logging' | 'error' | 'logged';
 type RegistrationStatus = 'registered' | null;
 export type UsersState = {
   loggedUser: User | null;
@@ -51,7 +51,7 @@ const usersSlice = createSlice({
       loginThunk.fulfilled,
       (state: UsersState, { payload }: PayloadAction<LoginResponse>) => {
         state.loggedUser = payload.user;
-        state.loginLoadState = 'idle';
+        state.loginLoadState = 'logged';
         state.token = payload.token;
       }
     );

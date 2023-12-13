@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from 'react';
 import { useUsers } from '../../hooks/users.hook';
 import { registerForm } from './register.module.scss';
 import { User } from '../../entities/user';
+import { Link } from 'react-router-dom';
 
 export function Register() {
   const [hasRegister, setHasRegister] = useState(false);
@@ -40,15 +41,23 @@ export function Register() {
             required
           />
           <button type="submit">Registrar</button>
-          <button type="button">Cancelar</button>
+          <div className="cancel-button">
+            <Link to={'/login'}>
+              <button type="button">CANCEL</button>
+            </Link>
+          </div>
         </form>
       )}
       {hasRegister && (
         <div>
           <p>Registrado correctamente</p>
-          <button type="button" onClick={handleCloseOk}>
-            Continuar
-          </button>
+          <div className="home-link-button">
+            <Link to={'/home'}>
+              <button type="button" onClick={handleCloseOk}>
+                Continuar
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </>

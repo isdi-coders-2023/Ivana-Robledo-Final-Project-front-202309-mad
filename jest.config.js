@@ -13,5 +13,6 @@ export default {
     'src/app.ts',
     'src/index.ts',
     'src/config.ts',
+    'src/app.routes/app.routes.ts',
   ],
 };
