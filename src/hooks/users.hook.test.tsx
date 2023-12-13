@@ -14,8 +14,10 @@ jest.mock('react-redux', () => ({
 
 const mockLoginUser = {} as LoginUser;
 const mockNewUser = {} as Partial<User>;
-
 describe('Given user Hook', () => {
+  global.window = Object.create(window);
+  const { location } = window;
+  (global.window as any).location = { ...location, reload: jest.fn() };
   const TestComponents = () => {
     const { login, logout, register } = useUsers();
 
