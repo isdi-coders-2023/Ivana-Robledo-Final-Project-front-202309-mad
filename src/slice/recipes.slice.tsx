@@ -26,7 +26,16 @@ const initialState: RecipesState = {
 export const recipesSlice = createSlice({
   name: 'recipe',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentRecipeItem(
+      state: RecipesState,
+      { payload }: PayloadAction<Recipe | null>
+    ) {
+      state.currentRecipe = payload;
+      return state;
+    },
+  },
+
   extraReducers(builder) {
     builder.addCase(loadRecipesThunk.pending, (state: RecipesState) => {
       state.recipeState = 'loading';
@@ -85,3 +94,4 @@ export const recipesSlice = createSlice({
 });
 
 export default recipesSlice.reducer;
+export const { setCurrentRecipeItem } = recipesSlice.actions;

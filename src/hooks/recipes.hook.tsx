@@ -8,6 +8,8 @@ import {
   loadRecipesThunk,
   updateRecipeThunk,
 } from '../slice/recipes.thunk';
+import { setCurrentRecipeItem } from '../slice/recipes.slice';
+import { Recipe } from '../entities/recipe';
 
 export function useRecipes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,6 +17,10 @@ export function useRecipes() {
   const { token } = useSelector((state: RootState) => state.UsersState);
 
   const recipesRepo = new ApiRepoRecipes(token!);
+
+  const handleDetailsPage = async (recipeItem: Recipe) => {
+    dispatch(setCurrentRecipeItem(recipeItem));
+  };
 
   const loadAllRecipes = () => {
     dispatch(loadRecipesThunk(recipesRepo));
@@ -42,5 +48,6 @@ export function useRecipes() {
     deleteRecipe,
     createRecipe,
     updateCurrentRecipe,
+    handleDetailsPage,
   };
 }

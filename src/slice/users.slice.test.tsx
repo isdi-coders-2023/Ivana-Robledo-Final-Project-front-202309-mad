@@ -1,5 +1,5 @@
 import { UsersState } from './users.slice';
-import usersSlice, { setToken, clearToken, logout } from '../slice/users.slice';
+import usersSlice, { clearToken, logout } from '../slice/users.slice';
 import { LoginUser, User } from '../entities/user';
 import { loginThunk, registerThunk } from './users.thunk';
 import { ApiRepoUsers } from '../services/api.repo.users';
@@ -22,15 +22,6 @@ describe('Given userSlice', () => {
 
       expect(newState.loggedUser).toBe(null);
       expect(newState.token).toBe(null);
-    });
-  });
-
-  describe('When we call slice with setToken action', () => {
-    test('then it should set token to the provided value', () => {
-      const newToken = 'newToken';
-      const newState = usersSlice(initialState, setToken(newToken));
-
-      expect(newState.token).toBe(newToken);
     });
   });
 

@@ -2,23 +2,18 @@
 import { useRecipes } from '../../hooks/recipes.hook';
 import { SyntheticEvent } from 'react';
 import styles from './recipe.form.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecipeForm() {
+  const navigate = useNavigate();
   const { createRecipe } = useRecipes();
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
     const formData = new FormData(formElement);
-    /*   Const data:= {
-      username: (formElement.elements.namedItem('username') as HTMLInputElement)
-        .value,
-      email: (formElement.elements.namedItem('email') as HTMLInputElement)
-        .value,
-      passwd: (formElement.elements.namedItem('passwd') as HTMLInputElement)
-        .value,
-    } as Partial<Recipe>; */
     createRecipe(formData);
+    navigate('/home');
   };
 
   return (

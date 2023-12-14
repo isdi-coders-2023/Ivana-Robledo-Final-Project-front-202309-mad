@@ -9,7 +9,7 @@ const ErrorPage = lazy(() => import('../../pages/error.page'));
 export const AppRoutes = () => (
   <Suspense>
     <Routes>
-      <Route path="/" element={<HomePage></HomePage>}></Route>
+      <Route path="/" element={<LoginPage></LoginPage>}></Route>
       <Route path="/home" element={<HomePage></HomePage>}></Route>
       <Route path="/login" element={<LoginPage></LoginPage>}></Route>
       <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
