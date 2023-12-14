@@ -1,9 +1,10 @@
 import { SyntheticEvent, useState } from 'react';
 import { useUsers } from '../../hooks/users.hook';
 import { LoginUser } from '../../entities/user';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Login() {
+  const navigate = useNavigate();
   const [hasLogin, setHasLogin] = useState(false);
   const { login } = useUsers();
 
@@ -36,11 +37,6 @@ export function Login() {
             Iniciar sesión
           </button>
 
-          {/* <div className="cancel-button">
-            <Link to={'/login'}>
-              <button type="button">CANCEL</button>
-            </Link>
-          </div> */}
           <p>No estás registrado?</p>
           <div className="register-link-button">
             <Link to={'/register'}>
@@ -49,11 +45,7 @@ export function Login() {
           </div>
         </form>
       )}
-      {hasLogin && (
-        <div>
-          <p>SUCESS</p>
-        </div>
-      )}
+      {hasLogin && navigate('/home')}
     </>
   );
 }

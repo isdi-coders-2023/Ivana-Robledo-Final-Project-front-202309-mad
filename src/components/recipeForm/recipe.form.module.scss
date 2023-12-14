@@ -1,0 +1,14 @@
+.createRecipeForm {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+
+  width: 80vh;
+}
+
+.titleAndForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

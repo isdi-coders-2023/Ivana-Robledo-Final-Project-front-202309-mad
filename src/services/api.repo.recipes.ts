@@ -3,12 +3,19 @@ import { Recipe } from '../entities/recipe';
 
 export class ApiRepoRecipes {
   apiUrl = serverUrl + '/recipes';
+  // eslint-disable-next-line no-unused-vars
+  constructor(public token: string) {
+    console.log('Token', this.token);
+  }
 
   async createRecipe(newRecipe: FormData): Promise<Recipe> {
     const url = this.apiUrl + '/create';
     const response = await fetch(url, {
       method: 'POST',
       body: newRecipe,
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+      },
     });
     if (!response.ok)
       throw new Error(response.status + ' ' + response.statusText);

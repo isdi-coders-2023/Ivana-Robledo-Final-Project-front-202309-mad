@@ -8,6 +8,11 @@ export default function HomePage() {
           <button type="button">Inicia sesion</button>
         </Link>
       </div>
+      <div className="create-link-button">
+        <Link to={'/create'}>
+          <button type="button">Crea receta</button>
+        </Link>
+      </div>
     </>
   );
 }
