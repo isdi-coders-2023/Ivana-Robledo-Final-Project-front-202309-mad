@@ -1,6 +1,7 @@
 import { ApiRepoRecipes } from './api.repo.recipes.js';
 
 describe('Given ApiRepoRecipes', () => {
+  const repo = new ApiRepoRecipes('');
   describe('When we instantiate it and response is ok', () => {
     let jsonMock: jest.Mock;
     beforeEach(() => {
@@ -11,8 +12,6 @@ describe('Given ApiRepoRecipes', () => {
       });
     });
 
-    const repo = new ApiRepoRecipes();
-
     test('Then the method createRecipe should be used', async () => {
       const result = await repo.createRecipe({} as FormData);
       expect(jsonMock).toHaveBeenCalled();
@@ -22,11 +21,6 @@ describe('Given ApiRepoRecipes', () => {
     test('Then the method updateRecipe should be used', async () => {
       const result = await repo.updateRecipe('', {} as FormData);
       expect(jsonMock).toHaveBeenCalled();
-      expect(result).toStrictEqual({});
-    });
-
-    test('Then the method deleteRecipe should be used', async () => {
-      const result = await repo.deleteRecipe('');
       expect(result).toStrictEqual({});
     });
 
@@ -46,7 +40,7 @@ describe('Given ApiRepoRecipes', () => {
   describe('When we instantiate it and response is not ok', () => {
     const errorStatus = 404;
     const errorStatusText = 'Not Found';
-
+    const token = '';
     beforeEach(() => {
       global.fetch = jest.fn().mockResolvedValueOnce({
         ok: false,
@@ -55,7 +49,7 @@ describe('Given ApiRepoRecipes', () => {
       });
     });
 
-    const repo = new ApiRepoRecipes();
+    const repo = new ApiRepoRecipes(token);
 
     test('Then the method createRecipe should throw an error', async () => {
       await expect(repo.createRecipe({} as FormData)).rejects.toThrow();

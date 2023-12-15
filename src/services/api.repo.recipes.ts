@@ -3,9 +3,9 @@ import { Recipe } from '../entities/recipe';
 
 export class ApiRepoRecipes {
   apiUrl = serverUrl + '/recipes';
-  // eslint-disable-next-line no-unused-vars
+
   constructor(public token: string) {
-    console.log('Token', this.token);
+    this.token = token;
   }
 
   async createRecipe(newRecipe: FormData): Promise<Recipe> {
@@ -27,6 +27,9 @@ export class ApiRepoRecipes {
     const response = await fetch(url, {
       method: 'PATCH',
       body: updatedRecipe,
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+      },
     });
 
     if (!response.ok)
@@ -34,14 +37,19 @@ export class ApiRepoRecipes {
     return response.json();
   }
 
-  async deleteRecipe(id: string): Promise<Recipe> {
-    const url = this.apiUrl + `/delete/${id}`;
+  async deleteRecipe(id: Recipe['id']): Promise<boolean> {
+    const url = this.apiUrl + `/${id}`;
+    console.log(id);
+    console.log(url);
     const response = await fetch(url, {
       method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+      },
     });
     if (!response.ok)
       throw new Error(response.status + ' ' + response.statusText);
-    return {} as Recipe;
+    return response.ok;
   }
 
   async getAllRecipes(): Promise<Recipe[]> {

@@ -7,7 +7,7 @@ import {
   loadOneRecipeThunk,
   loadRecipesThunk,
   updateRecipeThunk,
-} from '../slice/recipes.thunk';
+} from './recipes.thunk';
 
 describe('Given loadRecipesThunk', () => {
   describe('When we dispatch succesfully', () => {

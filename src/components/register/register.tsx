@@ -56,7 +56,7 @@ export function Register() {
         <div>
           <p>Registrado correctamente</p>
           <div className="home-link-button">
-            <Link to={'/home'}>
+            <Link to={'/main'}>
               <button type="button" onClick={handleCloseOk}>
                 Continuar
               </button>

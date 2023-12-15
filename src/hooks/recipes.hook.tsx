@@ -10,27 +10,32 @@ import {
 } from '../slice/recipes.thunk';
 import { setCurrentRecipeItem } from '../slice/recipes.slice';
 import { Recipe } from '../entities/recipe';
+import { useCallback, useMemo } from 'react';
 
 export function useRecipes() {
   const dispatch = useDispatch<AppDispatch>();
 
   const { token } = useSelector((state: RootState) => state.UsersState);
+  const { recipes, currentRecipe } = useSelector(
+    (state: RootState) => state.RecipesState
+  );
+  const recipesRepo = useMemo(() => new ApiRepoRecipes(token!), []);
 
-  const recipesRepo = new ApiRepoRecipes(token!);
+  /* Const recipesRepo = new ApiRepoRecipes(token!); */
 
   const handleDetailsPage = async (recipeItem: Recipe) => {
     dispatch(setCurrentRecipeItem(recipeItem));
   };
 
-  const loadAllRecipes = () => {
+  const loadAllRecipes = useCallback(async () => {
     dispatch(loadRecipesThunk(recipesRepo));
-  };
+  }, [recipesRepo, dispatch]);
 
   const loadOneRecipe = (id: string) => {
     dispatch(loadOneRecipeThunk({ repo: recipesRepo, id }));
   };
 
-  const deleteRecipe = (id: string) => {
+  const deleteRecipe = (id: Recipe['id']) => {
     dispatch(deleteRecipeThunk({ repo: recipesRepo, id }));
   };
 
@@ -49,5 +54,7 @@ export function useRecipes() {
     createRecipe,
     updateCurrentRecipe,
     handleDetailsPage,
+    recipes,
+    currentRecipe,
   };
 }

@@ -35,9 +35,9 @@ export const updateRecipeThunk = createAsyncThunk<
 });
 
 export const deleteRecipeThunk = createAsyncThunk<
-  Recipe,
+  Recipe['id'],
   { repo: ApiRepoRecipes; id: Recipe['id'] }
->('recipe/delete', async ({ repo, id }) => {
-  const deleteRecipe = await repo.deleteRecipe(id);
-  return deleteRecipe;
+>('delete', async ({ repo, id }) => {
+  await repo.deleteRecipe(id);
+  return id;
 });

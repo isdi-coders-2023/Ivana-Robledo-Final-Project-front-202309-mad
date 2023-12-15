@@ -12,17 +12,19 @@ export function List({ recipesToRender }: Props) {
 
   useEffect(() => {
     loadAllRecipes();
-  }, []);
+  }, [loadAllRecipes]);
 
   return (
-    <div className="list-container">
-      <div className="list-title-container">
+    <div className={styles.listContainer}>
+      <div className={styles.titleContainer}>
         <h2>List</h2>
       </div>
-      <ul className={styles.recipesList}>
-        {recipesToRender?.map((item) => (
-          <Card key={item.id} recipe={item}></Card>
-        ))}
+      <ul>
+        <li>
+          {recipesToRender?.map((item: Recipe) => (
+            <Card key={item.id} recipe={item}></Card>
+          ))}
+        </li>
       </ul>
     </div>
   );

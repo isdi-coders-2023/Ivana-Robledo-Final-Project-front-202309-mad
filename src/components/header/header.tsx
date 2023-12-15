@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { LogoutButton } from '../logoutButton/logout.button';
 import styles from './header.module.scss';
 
@@ -9,7 +10,9 @@ export function Header() {
         <h1>Sugar spells</h1>
       </div>
       <div className={styles.headerButtons}>
-        <LogoutButton></LogoutButton>
+        <Link to={'/'}>
+          <LogoutButton></LogoutButton>
+        </Link>
       </div>
     </header>
   );

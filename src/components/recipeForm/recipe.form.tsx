@@ -13,7 +13,7 @@ export default function RecipeForm() {
     const formElement = event.target as HTMLFormElement;
     const formData = new FormData(formElement);
     createRecipe(formData);
-    navigate('/home');
+    navigate('/main');
   };
 
   return (
@@ -55,12 +55,7 @@ export default function RecipeForm() {
           id="img"
           placeholder="Inserta aqui la imagen "
         />
-        {/*  <button type="submit">Crear</button> */}
-        {/* <div className="create-button">
-          <Link to={'/home'}> */}
         <button type="submit">Crear</button>
-        {/*  </Link> */}
-        {/*  </div> */}
       </form>
     </div>
   );

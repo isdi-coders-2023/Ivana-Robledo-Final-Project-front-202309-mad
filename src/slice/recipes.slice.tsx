@@ -75,13 +75,16 @@ export const recipesSlice = createSlice({
       return state;
     });
 
-    builder.addCase(deleteRecipeThunk.fulfilled, (state: RecipesState) => {
-      state.recipeDeleteState = 'idle';
-    });
-
-    builder.addCase(deleteRecipeThunk.pending, (state: RecipesState) => {
-      state.recipeDeleteState = 'loading';
-    });
+    builder.addCase(
+      deleteRecipeThunk.fulfilled,
+      (state: RecipesState, { payload }: PayloadAction<Recipe['id']>) => {
+        state.recipes.splice(
+          state.recipes.findIndex((item) => item.id === payload),
+          1
+        );
+        return state;
+      }
+    );
 
     builder.addCase(
       createRecipeThunk.fulfilled,
