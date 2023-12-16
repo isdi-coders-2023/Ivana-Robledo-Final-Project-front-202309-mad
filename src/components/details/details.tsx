@@ -4,19 +4,37 @@ import { RootState } from '../../store/store';
 import styles from './details.module.scss';
 import { useRecipes } from '../../hooks/recipes.hook';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 export function Details() {
   const navigate = useNavigate();
   const { currentRecipe } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { deleteRecipe /* , updateCurrentRecipe  */ } = useRecipes();
+  const { deleteRecipe, recipeDeleteState /* , updateCurrentRecipe  */ } =
+    useRecipes();
 
   const handleDelete = () => {
     deleteRecipe(currentRecipe!.id);
   };
 
-  navigate('/main');
+  useEffect(() => {
+    if (recipeDeleteState === 'loading') return;
+    if (recipeDeleteState === 'deleted') {
+      Swal.fire({
+        title: '¡Receta eliminada!',
+        width: '20rem',
+        padding: '2rem 0',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      navigate('/main');
+    }
+
+    if (recipeDeleteState === 'error') navigate('/error');
+  }, [recipeDeleteState, navigate]);
 
   const handleUpdate = () => {};
 

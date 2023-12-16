@@ -13,7 +13,7 @@ export type RecipesState = {
   recipes: Recipe[];
   recipeState: 'idle' | 'loading' | 'loaded' | 'error';
   recipeUpdateState: 'idle' | 'loading';
-  recipeDeleteState: 'idle' | 'loading';
+  recipeDeleteState: 'idle' | 'loading' | 'deleted' | 'error';
   recipeFilter: 'Mis recetas' | 'Galletas' | 'Tortas' | 'Todas las recetas';
 };
 
@@ -85,9 +85,19 @@ export const recipesSlice = createSlice({
           state.recipes.findIndex((item) => item.id === payload),
           1
         );
+        state.recipeDeleteState = 'deleted';
         return state;
       }
     );
+    builder.addCase(deleteRecipeThunk.pending, (state: RecipesState) => {
+      state.recipeDeleteState = 'loading';
+      return state;
+    });
+
+    builder.addCase(deleteRecipeThunk.rejected, (state: RecipesState) => {
+      state.recipeState = 'error';
+      return state;
+    });
 
     builder.addCase(
       createRecipeThunk.fulfilled,

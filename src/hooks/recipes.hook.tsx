@@ -16,7 +16,7 @@ export function useRecipes() {
   const dispatch = useDispatch<AppDispatch>();
 
   const { token } = useSelector((state: RootState) => state.UsersState);
-  const { recipes, currentRecipe } = useSelector(
+  const { recipes, currentRecipe, recipeDeleteState } = useSelector(
     (state: RootState) => state.RecipesState
   );
   const recipesRepo = useMemo(() => new ApiRepoRecipes(token!), []);
@@ -56,5 +56,6 @@ export function useRecipes() {
     handleDetailsPage,
     recipes,
     currentRecipe,
+    recipeDeleteState,
   };
 }
