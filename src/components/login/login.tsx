@@ -23,6 +23,8 @@ export function Login() {
   useEffect(() => {
     if (hasLogin) {
       navigate('/main');
+    } else if (!hasLogin) {
+      navigate('/');
     }
   }, [hasLogin, navigate]);
 
