@@ -30,8 +30,8 @@ export const updateRecipeThunk = createAsyncThunk<
   Recipe,
   { repo: ApiRepoRecipes; id: Recipe['id']; recipeToUpdate: FormData }
 >('recipes/update', async ({ repo, id, recipeToUpdate }) => {
-  const updateRecipe = await repo.updateRecipe(id, recipeToUpdate);
-  return updateRecipe;
+  const updatedRecipe = await repo.updateRecipe(id, recipeToUpdate);
+  return updatedRecipe;
 });
 
 export const deleteRecipeThunk = createAsyncThunk<

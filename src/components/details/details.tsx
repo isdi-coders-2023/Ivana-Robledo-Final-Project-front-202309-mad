@@ -3,16 +3,22 @@ import { RootState } from '../../store/store';
 /* Import { makeImageURL } from '../../services/images'; */
 import styles from './details.module.scss';
 import { useRecipes } from '../../hooks/recipes.hook';
+import { useNavigate } from 'react-router-dom';
 
 export function Details() {
+  const navigate = useNavigate();
   const { currentRecipe } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { deleteRecipe } = useRecipes();
+  const { deleteRecipe /* , updateCurrentRecipe  */ } = useRecipes();
 
   const handleDelete = () => {
-    deleteRecipe(currentRecipe!.id); // Fix argument error
+    deleteRecipe(currentRecipe!.id);
   };
+
+  navigate('/main');
+
+  const handleUpdate = () => {};
 
   /* Const recipeImg =
     currentRecipe &&
@@ -21,12 +27,19 @@ export function Details() {
  */
   return (
     <>
-      <div className="delete-button-container">
+      <div className={styles.deleteButtonContainer}>
         <img
           onClick={handleDelete}
           role="button"
-          className=""
           src="'../../../trash-solid.svg"
+          alt="Delete image"
+        />
+      </div>
+      <div className={styles.editButtonContainer}>
+        <img
+          onClick={handleUpdate}
+          role="button"
+          src="'../../../edit.svg"
           alt="Modify image"
         />
       </div>

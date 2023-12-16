@@ -5,12 +5,14 @@ import {
   deleteRecipeThunk,
   loadOneRecipeThunk,
   loadRecipesThunk,
+  updateRecipeThunk,
 } from './recipes.thunk';
 
 export type RecipesState = {
   currentRecipe: Recipe | null;
   recipes: Recipe[];
   recipeState: 'idle' | 'loading' | 'loaded' | 'error';
+  recipeUpdateState: 'idle' | 'loading';
   recipeDeleteState: 'idle' | 'loading';
   recipeFilter: 'Mis recetas' | 'Galletas' | 'Tortas' | 'Todas las recetas';
 };
@@ -19,6 +21,7 @@ const initialState: RecipesState = {
   currentRecipe: null,
   recipes: [],
   recipeState: 'idle',
+  recipeUpdateState: 'idle',
   recipeDeleteState: 'idle',
   recipeFilter: 'Todas las recetas',
 };
@@ -93,6 +96,24 @@ export const recipesSlice = createSlice({
         recipes: [...state.recipes, payload],
       })
     );
+
+    builder.addCase(
+      updateRecipeThunk.fulfilled,
+      (state: RecipesState, { payload }: PayloadAction<Recipe>) => {
+        const findRecipe =
+          state.recipes[
+            state.recipes.findIndex((item) => item.id === payload.id)
+          ];
+        state.recipeUpdateState = 'idle';
+        state.currentRecipe = findRecipe;
+        return state;
+      }
+    );
+
+    builder.addCase(updateRecipeThunk.pending, (state: RecipesState) => {
+      state.recipeUpdateState = 'loading';
+      return state;
+    });
   },
 });
 
