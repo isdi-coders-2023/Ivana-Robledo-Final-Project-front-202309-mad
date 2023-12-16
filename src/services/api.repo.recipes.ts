@@ -23,7 +23,7 @@ export class ApiRepoRecipes {
   }
 
   async updateRecipe(id: string, updatedRecipe: FormData): Promise<Recipe> {
-    const url = this.apiUrl + `/update/${id}`;
+    const url = this.apiUrl + `/${id}`;
     const response = await fetch(url, {
       method: 'PATCH',
       body: updatedRecipe,

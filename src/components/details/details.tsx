@@ -3,17 +3,17 @@ import { RootState } from '../../store/store';
 /* Import { makeImageURL } from '../../services/images'; */
 import styles from './details.module.scss';
 import { useRecipes } from '../../hooks/recipes.hook';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import EditRecipePage from '../../pages/edit.page';
 
 export function Details() {
   const navigate = useNavigate();
   const { currentRecipe } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { deleteRecipe, recipeDeleteState /* , updateCurrentRecipe  */ } =
-    useRecipes();
+  const { deleteRecipe, recipeDeleteState } = useRecipes();
 
   const handleDelete = () => {
     deleteRecipe(currentRecipe!.id);
@@ -36,7 +36,7 @@ export function Details() {
     if (recipeDeleteState === 'error') navigate('/error');
   }, [recipeDeleteState, navigate]);
 
-  const handleUpdate = () => {};
+  const handleUpdate = () => <EditRecipePage></EditRecipePage>;
 
   /* Const recipeImg =
     currentRecipe &&
@@ -54,12 +54,14 @@ export function Details() {
         />
       </div>
       <div className={styles.editButtonContainer}>
-        <img
-          onClick={handleUpdate}
-          role="button"
-          src="'../../../edit.svg"
-          alt="Modify image"
-        />
+        <Link to={'/editpage/' + currentRecipe!.id}>
+          <img
+            onClick={handleUpdate}
+            role="button"
+            src="'../../../edit.svg"
+            alt="Modify image"
+          />
+        </Link>
       </div>
       <div className={styles.details}>
         <img src={currentRecipe?.img.url} alt="imagen de receta seleccionada" />
