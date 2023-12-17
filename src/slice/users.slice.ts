@@ -24,9 +24,6 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    setToken(state, action) {
-      state.token = action.payload;
-    },
     clearToken(state) {
       state.token = null;
     },
@@ -63,5 +60,5 @@ const usersSlice = createSlice({
 
 export default usersSlice.reducer;
 export const ac = usersSlice.actions;
-export const { setToken, clearToken, logout } = usersSlice.actions;
+export const { clearToken, logout } = usersSlice.actions;
 export const { reducer, actions } = usersSlice;

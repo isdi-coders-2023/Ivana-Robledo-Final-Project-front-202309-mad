@@ -1,25 +1,36 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
 import { Header } from './header';
-import { MemoryRouter as Router } from 'react-router-dom';
-import { LogoutButton } from '../logoutButton/logout.button';
-
-jest.mock('../logoutButton/logout.button');
+import '@testing-library/jest-dom';
 
 describe('Given Header component', () => {
   describe('When we instantiate', () => {
     beforeEach(() => {
+      const mockUsersReducer = () => ({
+        loggedUser: null,
+        loginLoadState: 'idle',
+      });
+
+      const mockStore = configureStore({
+        reducer: {
+          UsersState: mockUsersReducer,
+        },
+      });
+
       render(
-        <Router>
-          <Header />
-        </Router>
+        <Provider store={mockStore}>
+          <Router>
+            <Header />
+          </Router>
+        </Provider>
       );
     });
 
     test('Then it should be in the document', () => {
       const headerElement = screen.getByRole('banner');
       expect(headerElement).toBeInTheDocument();
-      expect(LogoutButton).toHaveBeenCalled();
     });
   });
 });

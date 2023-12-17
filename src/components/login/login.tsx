@@ -1,9 +1,10 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { useUsers } from '../../hooks/users.hook';
 import { LoginUser } from '../../entities/user';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Login() {
+  const navigate = useNavigate();
   const [hasLogin, setHasLogin] = useState(false);
   const { login } = useUsers();
 
@@ -18,6 +19,14 @@ export function Login() {
     login(loginUser);
     setHasLogin(true);
   };
+
+  useEffect(() => {
+    if (hasLogin) {
+      navigate('/main');
+    } else if (!hasLogin) {
+      navigate('/');
+    }
+  }, [hasLogin, navigate]);
 
   return (
     <>
@@ -36,11 +45,6 @@ export function Login() {
             Iniciar sesión
           </button>
 
-          {/* <div className="cancel-button">
-            <Link to={'/login'}>
-              <button type="button">CANCEL</button>
-            </Link>
-          </div> */}
           <p>No estás registrado?</p>
           <div className="register-link-button">
             <Link to={'/register'}>
@@ -48,11 +52,6 @@ export function Login() {
             </Link>
           </div>
         </form>
-      )}
-      {hasLogin && (
-        <div>
-          <p>SUCESS</p>
-        </div>
       )}
     </>
   );
