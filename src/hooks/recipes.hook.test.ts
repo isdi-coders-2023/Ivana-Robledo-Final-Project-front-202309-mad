@@ -23,12 +23,32 @@ describe('Given useRecipes hook...', () => {
     });
   });
 
+  describe('When loadOneRecipe component is called', () => {
+    test('Then it should dispatch', async () => {
+      const { result } = renderHook(() => useRecipes());
+      const { loadOneRecipe } = result.current;
+
+      loadOneRecipe({} as Recipe['id']);
+      expect(dispatch).toHaveBeenCalled();
+    });
+  });
+
   describe('When createRecipe component is called', () => {
     test('Then it should dispatch', async () => {
       const { result } = renderHook(() => useRecipes());
       const { createRecipe } = result.current;
 
       createRecipe({} as FormData);
+      expect(dispatch).toHaveBeenCalled();
+    });
+  });
+
+  describe('When updateCurrentRecipe component is called', () => {
+    test('Then it should dispatch', async () => {
+      const { result } = renderHook(() => useRecipes());
+      const { updateCurrentRecipe } = result.current;
+
+      updateCurrentRecipe({} as Recipe['id'], {} as FormData);
       expect(dispatch).toHaveBeenCalled();
     });
   });
