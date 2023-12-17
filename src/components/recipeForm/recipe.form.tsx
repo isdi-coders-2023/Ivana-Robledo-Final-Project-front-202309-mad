@@ -29,17 +29,15 @@ export default function RecipeForm() {
           name="recipeName"
           placeholder="Titulo de la receta"
         />
-        <input
-          type="text"
+        <textarea
           name="ingredients"
-          placeholder="Ingredientes"
+          placeholder="Ingredientes (uno por línea)"
           required
-        />
-        <input
-          type="text"
+        ></textarea>
+        <textarea
           name="description"
           placeholder="Descripcion de la receta"
-        />
+        ></textarea>
         <select
           name="category"
           id="category"

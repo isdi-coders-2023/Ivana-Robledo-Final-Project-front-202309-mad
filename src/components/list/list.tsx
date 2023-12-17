@@ -16,15 +16,10 @@ export function List({ recipesToRender }: Props) {
 
   return (
     <div className={styles.listContainer}>
-      <div className={styles.titleContainer}>
-        <h2>List</h2>
-      </div>
       <ul>
-        <li>
-          {recipesToRender?.map((item: Recipe) => (
-            <Card key={item.id} recipe={item}></Card>
-          ))}
-        </li>
+        {recipesToRender?.map((item: Recipe) => (
+          <Card key={item.id} recipe={item}></Card>
+        ))}
       </ul>
     </div>
   );
