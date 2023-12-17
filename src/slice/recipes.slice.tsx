@@ -127,19 +127,6 @@ export const recipesSlice = createSlice({
       }
     );
 
-    /* Builder.addCase(
-      updateRecipeThunk.fulfilled,
-      (state: RecipesState, { payload }: PayloadAction<Recipe>) => {
-        const findRecipe =
-          state.recipes[
-            state.recipes.findIndex((item) => item.id === payload.id)
-          ];
-        state.recipeUpdateState = 'idle';
-        state.currentRecipe = findRecipe;
-        return state;
-      }
-    );
- */
     builder.addCase(updateRecipeThunk.pending, (state: RecipesState) => {
       state.recipeUpdateState = 'loading';
       return state;
