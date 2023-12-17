@@ -110,6 +110,26 @@ export const recipesSlice = createSlice({
     builder.addCase(
       updateRecipeThunk.fulfilled,
       (state: RecipesState, { payload }: PayloadAction<Recipe>) => {
+        const findRecipeIndex = state.recipes.findIndex(
+          (item) => item.id === payload.id
+        );
+        if (findRecipeIndex !== -1) {
+          // Actualizar la receta en la lista de recetas
+          state.recipes[findRecipeIndex] = payload;
+          // Actualizar la receta actual si es la misma receta que se ha actualizado
+          if (state.currentRecipe && state.currentRecipe.id === payload.id) {
+            state.currentRecipe = payload;
+          }
+        }
+
+        state.recipeUpdateState = 'idle';
+        return state;
+      }
+    );
+
+    /* Builder.addCase(
+      updateRecipeThunk.fulfilled,
+      (state: RecipesState, { payload }: PayloadAction<Recipe>) => {
         const findRecipe =
           state.recipes[
             state.recipes.findIndex((item) => item.id === payload.id)
@@ -119,7 +139,7 @@ export const recipesSlice = createSlice({
         return state;
       }
     );
-
+ */
     builder.addCase(updateRecipeThunk.pending, (state: RecipesState) => {
       state.recipeUpdateState = 'loading';
       return state;
