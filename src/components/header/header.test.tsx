@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Header } from './header';
+import '@testing-library/jest-dom';
 
 describe('Given Header component', () => {
   describe('When we instantiate', () => {

@@ -46,36 +46,3 @@ describe('EditPage', () => {
     expect(updateCurrentRecipeMock).toHaveBeenCalled();
   });
 });
-
-/* Import React from 'react';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
-import { EditPage } from './edit.page';
-
-jest.mock('../hooks/recipes.hook', () => ({
-  useRecipes: () => ({
-    recipes: [{ id: '1', recipeName: 'Test Recipe' }],
-    updateCurrentRecipe: jest.fn(),
-  }),
-}));
-
-describe('EditPage', () => {
-  it('updates the recipe on form submission', () => {
-    const { getByRole, getByLabelText } = render(
-      <MemoryRouter>
-        <EditPage />
-      </MemoryRouter>
-    );
-    const input = getByLabelText(/test/i);
-    const submitButton = getByRole('button', { name: /submit/i });
-
-    userEvent.type(input, 'Updated Recipe');
-    userEvent.click(submitButton);
-
-    expect(
-      jest.requireMock('../../hooks/recipes.hook').useRecipes()
-        .updateCurrentRecipe
-    ).toHaveBeenCalledWith('1', expect.any(FormData));
-  });
-}); */
