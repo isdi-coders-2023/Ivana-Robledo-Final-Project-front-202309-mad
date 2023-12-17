@@ -22,7 +22,6 @@ export function useUsers() {
 
   const logout = () => {
     dispatch(ac.logout());
-    window.location.reload();
   };
 
   return {

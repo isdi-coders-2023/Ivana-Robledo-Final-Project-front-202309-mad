@@ -23,11 +23,13 @@ export function Details() {
     if (recipeDeleteState === 'loading') return;
     if (recipeDeleteState === 'deleted') {
       Swal.fire({
-        title: '¡Receta eliminada!',
-        width: '20rem',
-        padding: '2rem 0',
-        showConfirmButton: false,
-        timer: 1500,
+        title: 'Hecho!',
+        text: 'Tu receta ha sido eliminada correctamente',
+        imageUrl:
+          'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
       });
 
       navigate('/main');

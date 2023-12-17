@@ -2,11 +2,11 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecipes } from '../hooks/recipes.hook';
 import React from 'react';
+/* Import Swal from 'sweetalert2'; */
 
 export default function EditRecipePage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
   const { loadAllRecipes, updateCurrentRecipe, recipes, recipeUpdateState } =
     useRecipes();
 
@@ -23,6 +23,21 @@ export default function EditRecipePage() {
   useEffect(() => {
     loadAllRecipes();
   }, [recipeUpdateState]);
+
+  /*   UseEffect(() => {
+    if (recipeUpdateState === 'loading') return;
+    if (recipeUpdateState === 'idle') {
+      Swal.fire({
+        title: 'Listo!',
+        text: 'Tu receta ha sido modificada correctamente',
+        imageUrl:
+          'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+      });
+    }
+  }); */
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

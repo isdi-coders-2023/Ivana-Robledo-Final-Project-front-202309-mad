@@ -39,8 +39,6 @@ export class ApiRepoRecipes {
 
   async deleteRecipe(id: Recipe['id']): Promise<boolean> {
     const url = this.apiUrl + `/${id}`;
-    console.log(id);
-    console.log(url);
     const response = await fetch(url, {
       method: 'DELETE',
       headers: {

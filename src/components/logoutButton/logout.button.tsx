@@ -11,7 +11,6 @@ export function LogoutButton() {
           <button
             className={styles.logoutbutton}
             onClick={logout}
-            onKeyDown={logout}
             role="button"
           >
             Logout

@@ -14,9 +14,6 @@ export function Header() {
             <img src="logo.png" alt="Logo de galleta" width={50} />
             <h1>Sugar spells</h1>
           </div>
-          <div className={styles.headerButtons}>
-            <LogoutButton></LogoutButton>
-          </div>
         </header>
       )}
       {loginLoadState === 'logged' && (
