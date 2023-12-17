@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-/* Import { makeImageURL } from '../../services/images'; */
 import styles from './details.module.scss';
 import { useRecipes } from '../../hooks/recipes.hook';
 import { Link, useNavigate } from 'react-router-dom';
@@ -40,11 +39,6 @@ export function Details() {
 
   const handleUpdate = () => <EditRecipePage></EditRecipePage>;
 
-  /* Const recipeImg =
-    currentRecipe &&
-    currentRecipe.img &&
-    makeImageURL(currentRecipe.img.publicId, 300, 200); // Updated code
- */
   return (
     <>
       <div className={styles.deleteButtonContainer}>
@@ -77,9 +71,6 @@ export function Details() {
           <div className="card-description">
             <p className="card-description">{currentRecipe?.description}</p>
           </div>
-          {/* <div className="card-year">
-            <p className="card-year">{currentRecipe?.author.username}</p>
-          </div> */}
         </div>
       </div>
     </>
