@@ -3,9 +3,7 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  width: 80vw; /* Cambiado a viewport width */
-
-  /* Añadido espaciado entre elementos */
+  width: 80vw;
   margin-top: 5px;
 }
 .createRecipeForm textarea {
@@ -38,7 +36,6 @@
 }
 
 .createRecipeForm button {
-  /* Cambiado color de fondo para el botón de archivos */
   background-color: #cbe3f2;
   color: #0a0a0a;
   border: none;
@@ -49,7 +46,6 @@
 }
 
 .createRecipeForm button:hover {
-  /* Cambiado color de fondo al pasar el mouse */
   background-color: rgb(133, 182, 215);
 }
 
@@ -60,18 +56,16 @@
 }
 
 .createRecipeForm input[type='file'] {
-  /* Estilo específico para el input de tipo file */
   margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f8f8f8;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombreado */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
 
 .createRecipeForm input[type='file']:hover {
-  /* Cambiado color de fondo al pasar el mouse */
   background-color: rgb(209, 193, 212);
 }

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecipes } from '../hooks/recipes.hook';
 import React from 'react';
 import styles from './edit.page.module.scss';
+import Swal from 'sweetalert2';
 /* Import Swal from 'sweetalert2'; */
 
 export default function EditRecipePage() {
@@ -28,15 +29,6 @@ export default function EditRecipePage() {
   /*   UseEffect(() => {
     if (recipeUpdateState === 'loading') return;
     if (recipeUpdateState === 'idle') {
-      Swal.fire({
-        title: 'Listo!',
-        text: 'Tu receta ha sido modificada correctamente',
-        imageUrl:
-          'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
-      });
     }
   }); */
 
@@ -56,7 +48,19 @@ export default function EditRecipePage() {
     event.preventDefault();
     const formElement = event.target as HTMLFormElement;
     const updatedFormData = new FormData(formElement);
+
     updateCurrentRecipe(findRecipe!.id, updatedFormData);
+    loadAllRecipes(); // Aca actualizo la lista de mis recetas.
+
+    Swal.fire({
+      title: 'Listo!',
+      text: 'Tu receta ha sido modificada correctamente',
+      imageUrl:
+        'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    });
     navigate('/main');
   };
 

@@ -3,7 +3,7 @@ import { RootState } from '../../store/store';
 import styles from './details.module.scss';
 import { useRecipes } from '../../hooks/recipes.hook';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+/* Import { useEffect } from 'react'; */
 import Swal from 'sweetalert2';
 import EditRecipePage from '../../pages/edit.page';
 
@@ -12,30 +12,30 @@ export function Details() {
   const { currentRecipe } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { deleteRecipe, recipeDeleteState } = useRecipes();
+  const { deleteRecipe /* , recipeDeleteState  */ } = useRecipes();
 
   const handleDelete = () => {
     deleteRecipe(currentRecipe!.id);
+    Swal.fire({
+      title: 'Hecho!',
+      text: 'Tu receta ha sido eliminada correctamente',
+      imageUrl:
+        'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    });
+    navigate('/main');
   };
 
-  useEffect(() => {
+  /*  UseEffect(() => {
     if (recipeDeleteState === 'loading') return;
     if (recipeDeleteState === 'deleted') {
-      Swal.fire({
-        title: 'Hecho!',
-        text: 'Tu receta ha sido eliminada correctamente',
-        imageUrl:
-          'https://images.unsplash.com/photo-1462475279937-40cb2b162a99?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
-      });
 
-      navigate('/main');
     }
 
     if (recipeDeleteState === 'error') navigate('/error');
-  }, [recipeDeleteState, navigate]);
+  }, [recipeDeleteState, navigate]); */
 
   const handleUpdate = () => <EditRecipePage></EditRecipePage>;
 

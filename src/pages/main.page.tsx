@@ -4,14 +4,21 @@ import { Link } from 'react-router-dom';
 import { List } from '../components/list/list';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import styles from './main.page.module.scss'; // Importa tus estilos CSS
+import styles from './main.page.module.scss';
+import { useRecipes } from '../hooks/recipes.hook';
+import { useEffect } from 'react';
 
 export default function MainPage() {
-  const { recipes } = useSelector((state: RootState) => state.RecipesState);
-
-  const category1Recipes = recipes.filter(
-    (recipe) => recipe.category === 'Mis recetas'
+  const { recipes, recipeUpdateState } = useSelector(
+    (state: RootState) => state.RecipesState
   );
+  const { loggedUser } = useSelector((state: RootState) => state.UsersState);
+  const { loadAllRecipes } = useRecipes();
+
+  useEffect(() => {
+    loadAllRecipes();
+  }, [recipeUpdateState]);
+
   const category2Recipes = recipes.filter(
     (recipe) => recipe.category === 'Galletas'
   );
@@ -29,7 +36,7 @@ export default function MainPage() {
       <div className={styles.categoriesContainer}>
         <div className={styles.category}>
           <h2>Mis recetas</h2>
-          <List recipesToRender={category1Recipes} />
+          <List recipesToRender={loggedUser?.recipes} />
         </div>
         <div className={styles.category}>
           <h2>Galletas</h2>
