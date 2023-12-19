@@ -26,12 +26,6 @@ export default function EditRecipePage() {
     loadAllRecipes();
   }, [recipeUpdateState]);
 
-  /*   UseEffect(() => {
-    if (recipeUpdateState === 'loading') return;
-    if (recipeUpdateState === 'idle') {
-    }
-  }); */
-
   const handleInputChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement

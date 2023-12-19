@@ -19,6 +19,10 @@ export default function MainPage() {
     loadAllRecipes();
   }, [recipeUpdateState]);
 
+  const userRecipes = recipes.filter(
+    (recipe) => recipe.author.email === loggedUser?.email
+  );
+
   const category2Recipes = recipes.filter(
     (recipe) => recipe.category === 'Galletas'
   );
@@ -36,7 +40,7 @@ export default function MainPage() {
       <div className={styles.categoriesContainer}>
         <div className={styles.category}>
           <h2>Mis recetas</h2>
-          <List recipesToRender={loggedUser?.recipes} />
+          <List recipesToRender={userRecipes} />
         </div>
         <div className={styles.category}>
           <h2>Galletas</h2>
