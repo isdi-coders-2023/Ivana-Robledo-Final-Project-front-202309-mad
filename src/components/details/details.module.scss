@@ -10,6 +10,20 @@
   margin: 20px;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  margin: 1rem;
+}
+
+.deleteButtonContainer img,
+.editButtonContainer img {
+  height: 1.5rem;
+  margin: 1.5rem;
+}
+
 .details img {
   width: 100%;
   max-height: 300px;

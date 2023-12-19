@@ -15,7 +15,6 @@ export default function MainPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const isProfilePage = location.pathname === '/myrecipes/';
-  /* Const { loggedUser } = useSelector((state: RootState) => state.UsersState); */
   const { loadAllRecipes } = useRecipes();
 
   useEffect(() => {
@@ -31,31 +30,38 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainPageContainer}>
-      <div className={styles.createLinkButton}>
-        <Link to={'/create'}>
-          <button type="button">Crea receta</button>
-        </Link>
-      </div>
-      <div className={styles.myRecipesLinkButton}>
-        {!isProfilePage && (
-          <button
-            data-testid="button"
-            className={styles.myrecipesbutton}
-            onClick={() => navigate('/myrecipes')}
-          >
-            Mis recetas
-          </button>
-        )}
+      <div className={styles.mainButtons}>
+        <div className={styles.createLinkButton}>
+          <Link to={'/create'}>
+            <button type="button" className={styles.createButton}>
+              Crea receta
+            </button>
+          </Link>
+        </div>
+        <div className={styles.myRecipesLinkButton}>
+          {!isProfilePage && (
+            <button
+              data-testid="button"
+              className={styles.myrecipesbutton}
+              onClick={() => navigate('/myrecipes')}
+            >
+              Mis recetas
+            </button>
+          )}
+        </div>
       </div>
       <div className={styles.categoriesContainer}>
-        <div className={styles.category}>
+        <div className={styles.h2Container}>
           <h2>Galletas</h2>
+        </div>
+        <div className={styles.category}>
           <List recipesToRender={category2Recipes} />
         </div>
-        <div className={styles.category}>
-          <h2>Torta</h2>
-          <List recipesToRender={category3Recipes} />
-        </div>
+        <div className={styles.h2Container}></div>
+        <h2>Tortas</h2>
+      </div>
+      <div className={styles.category}>
+        <List recipesToRender={category3Recipes} />
       </div>
     </div>
   );

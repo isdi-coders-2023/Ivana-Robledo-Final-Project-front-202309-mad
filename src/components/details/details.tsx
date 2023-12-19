@@ -35,29 +35,31 @@ export function Details() {
 
   return (
     <>
-      {auth && (
-        <div className={styles.deleteButtonContainer}>
-          <img
-            onClick={handleDelete}
-            role="button"
-            src="../../../trash-solid.svg"
-            alt="Delete image"
-          />
-        </div>
-      )}
-
-      {auth && (
-        <div className={styles.editButtonContainer}>
-          <Link to={`/editpage/${currentRecipe!.id}`}>
+      <div className={styles.buttons}>
+        {auth && (
+          <div className={styles.deleteButtonContainer}>
             <img
-              onClick={handleUpdate}
+              onClick={handleDelete}
               role="button"
-              src="../../../edit.svg"
-              alt="Modify image"
+              src="../../../trash-solid.svg"
+              alt="Delete image"
             />
-          </Link>
-        </div>
-      )}
+          </div>
+        )}
+
+        {auth && (
+          <div className={styles.editButtonContainer}>
+            <Link to={`/editpage/${currentRecipe!.id}`}>
+              <img
+                onClick={handleUpdate}
+                role="button"
+                src="../../../edit.svg"
+                alt="Modify image"
+              />
+            </Link>
+          </div>
+        )}
+      </div>
       <div className={styles.details}>
         <img src={currentRecipe?.img.url} alt="imagen de receta seleccionada" />
         <div>
