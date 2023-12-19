@@ -1,0 +1,42 @@
+.mainPageContainer {
+  padding: 20px;
+}
+
+.createLinkButton {
+  margin-bottom: 20px;
+}
+
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.category,
+.category1 {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.listContainer {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.listContainer::-webkit-scrollbar {
+  //display: none;
+  overflow: hidden;
+}

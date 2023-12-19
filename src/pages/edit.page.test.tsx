@@ -35,13 +35,13 @@ describe('EditPage', () => {
       </MemoryRouter>
     );
 
-    const submitButton = getByRole('button', { name: /crear/i });
+    const submitButton = getByRole('button', { name: /Guardar cambios/i });
 
     userEvent.click(submitButton);
 
-    const formElement = getByRole('form'); // Obtener la referencia al formulario
+    const formElement = getByRole('form');
 
-    fireEvent.submit(formElement); // Utilizar fireEvent.submit en lugar de userEvent.submit
+    fireEvent.submit(formElement);
 
     expect(updateCurrentRecipeMock).toHaveBeenCalled();
   });

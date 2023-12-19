@@ -101,7 +101,7 @@ export const recipesSlice = createSlice({
 
     builder.addCase(
       createRecipeThunk.fulfilled,
-      (state: RecipesState, { payload }) => ({
+      (state: RecipesState, { payload }: PayloadAction<Recipe>) => ({
         ...state,
         recipes: [...state.recipes, payload],
       })

@@ -7,7 +7,7 @@ export function LogoutButton() {
   return (
     <>
       {loginLoadState === 'logged' && (
-        <div className="login-link-button">
+        <div className={styles.loginLinkButton}>
           <button
             className={styles.logoutbutton}
             onClick={logout}

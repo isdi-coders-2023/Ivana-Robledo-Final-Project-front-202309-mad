@@ -1,18 +1,27 @@
-.listContainer {
+h2 {
+  color: black;
   display: flex;
   flex-direction: row;
-  align-items: center;
-}
-.titleContainer {
-  display: flex;
   justify-content: center;
-  align-items: center;
+  margin-bottom: 2rem;
 }
-h2 {
-  color: aqua;
+
+.listItem {
+  flex: 0 0 auto;
+  width: 30%; /* Puedes ajustar este porcentaje según sea necesario */
 }
 
 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+  width: 300px;
 }
