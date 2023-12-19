@@ -1,6 +1,6 @@
 // MainPage.jsx
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { List } from '../components/list/list';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
@@ -9,19 +9,18 @@ import { useRecipes } from '../hooks/recipes.hook';
 import { useEffect } from 'react';
 
 export default function MainPage() {
-  const { recipes, recipeUpdateState } = useSelector(
+  const { recipes, recipeUpdateState, recipeState } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { loggedUser } = useSelector((state: RootState) => state.UsersState);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isProfilePage = location.pathname === '/myrecipes/';
+  /* Const { loggedUser } = useSelector((state: RootState) => state.UsersState); */
   const { loadAllRecipes } = useRecipes();
 
   useEffect(() => {
     loadAllRecipes();
-  }, [recipeUpdateState]);
-
-  const userRecipes = recipes.filter(
-    (recipe) => recipe.author.email === loggedUser?.email
-  );
+  }, [recipeUpdateState || recipeState]);
 
   const category2Recipes = recipes.filter(
     (recipe) => recipe.category === 'Galletas'
@@ -37,11 +36,18 @@ export default function MainPage() {
           <button type="button">Crea receta</button>
         </Link>
       </div>
+      <div className={styles.myRecipesLinkButton}>
+        {!isProfilePage && (
+          <button
+            data-testid="button"
+            className={styles.myrecipesbutton}
+            onClick={() => navigate('/myrecipes')}
+          >
+            Mis recetas
+          </button>
+        )}
+      </div>
       <div className={styles.categoriesContainer}>
-        <div className={styles.category}>
-          <h2>Mis recetas</h2>
-          <List recipesToRender={userRecipes} />
-        </div>
         <div className={styles.category}>
           <h2>Galletas</h2>
           <List recipesToRender={category2Recipes} />

@@ -18,7 +18,6 @@ export function Details() {
   const handleDelete = () => {
     deleteRecipe(currentRecipe!.id);
     Swal.fire({
-      position: 'top-end',
       icon: 'success',
       title: 'Tu receta ha sido eliminada exitosamente!',
       showConfirmButton: false,
