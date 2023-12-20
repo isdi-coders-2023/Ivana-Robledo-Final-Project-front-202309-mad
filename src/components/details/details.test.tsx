@@ -10,6 +10,10 @@ jest.mock('../../hooks/users.hook', () => ({
   useUsers: jest.fn(),
 }));
 
+jest.mock('sweetalert2', () => ({
+  fire: jest.fn().mockResolvedValue({}),
+}));
+
 jest.mock('../../hooks/recipes.hook', () => ({
   useRecipes: jest.fn().mockReturnValue({
     currentRecipe: {

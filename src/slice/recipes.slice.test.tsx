@@ -4,7 +4,7 @@ import recipesReducer, {
   setCurrentRecipeItem,
   RecipesState,
 } from './recipes.slice';
-import { /*  updateRecipeThunk, */ deleteRecipeThunk } from './recipes.thunk';
+import { deleteRecipeThunk } from './recipes.thunk';
 import { ApiRepoRecipes } from '../services/api.repo.recipes';
 describe('Given recipes slice', (): void => {
   jest.mock('../services/api.repo.recipes', () =>
@@ -58,7 +58,6 @@ describe('Given recipes slice', (): void => {
         'mockToken'
       );
 
-      // Act
       const nextState = recipesReducer(
         initialState,
         deleteRecipeThunk.pending(recipeIdToDelete, {
@@ -67,11 +66,10 @@ describe('Given recipes slice', (): void => {
         })
       );
 
-      // Assert
       const index = nextState.recipes.findIndex(
         (item) => item.id === recipeIdToDelete
       );
-      expect(index).toBe(-1); // The recipe with id '2' should have been deleted
+      expect(index).toBe(-1);
     });
 
     test('should handle setCurrentRecipeItem', () => {
