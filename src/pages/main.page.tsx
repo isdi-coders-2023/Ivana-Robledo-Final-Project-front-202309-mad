@@ -1,6 +1,6 @@
 // MainPage.jsx
 
-import { Link } from 'react-router-dom';
+import { Link /* , useLocation, useNavigate */ } from 'react-router-dom';
 import { List } from '../components/list/list';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
@@ -9,19 +9,15 @@ import { useRecipes } from '../hooks/recipes.hook';
 import { useEffect } from 'react';
 
 export default function MainPage() {
-  const { recipes, recipeUpdateState } = useSelector(
+  const { recipes, recipeUpdateState, recipeState } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const { loggedUser } = useSelector((state: RootState) => state.UsersState);
+
   const { loadAllRecipes } = useRecipes();
 
   useEffect(() => {
     loadAllRecipes();
-  }, [recipeUpdateState]);
-
-  const userRecipes = recipes.filter(
-    (recipe) => recipe.author.email === loggedUser?.email
-  );
+  }, [recipeUpdateState || recipeState]);
 
   const category2Recipes = recipes.filter(
     (recipe) => recipe.category === 'Galletas'
@@ -32,24 +28,27 @@ export default function MainPage() {
 
   return (
     <div className={styles.mainPageContainer}>
-      <div className={styles.createLinkButton}>
-        <Link to={'/create'}>
-          <button type="button">Crea receta</button>
-        </Link>
+      <div className={styles.mainButtons}>
+        <div className={styles.createLinkButton}>
+          <Link to={'/create'}>
+            <button type="button" className={styles.createButton}>
+              Crear receta
+            </button>
+          </Link>
+        </div>
       </div>
       <div className={styles.categoriesContainer}>
-        <div className={styles.category}>
-          <h2>Mis recetas</h2>
-          <List recipesToRender={userRecipes} />
+        <div className={styles.h2Container}>
+          <h2>Galletas</h2>
         </div>
         <div className={styles.category}>
-          <h2>Galletas</h2>
           <List recipesToRender={category2Recipes} />
         </div>
-        <div className={styles.category}>
-          <h2>Torta</h2>
-          <List recipesToRender={category3Recipes} />
-        </div>
+        <div className={styles.h2Container}></div>
+        <h2>Tortas</h2>
+      </div>
+      <div className={styles.category}>
+        <List recipesToRender={category3Recipes} />
       </div>
     </div>
   );

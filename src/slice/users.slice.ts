@@ -4,7 +4,7 @@ import { User } from '../entities/user';
 import { loginThunk, registerThunk } from './users.thunk';
 import { LoginResponse } from '../types/login.response';
 
-type LoginState = 'idle' | 'logging' | 'error' | 'logged';
+type LoginState = 'idle' | 'logging' | 'error' | 'logged' | 'logout';
 type RegistrationStatus = 'registered' | null;
 export type UsersState = {
   loggedUser: User | null;
@@ -29,6 +29,7 @@ const usersSlice = createSlice({
     },
     logout(state: UsersState) {
       state.loggedUser = null;
+      state.loginLoadState = 'logout';
       state.token = null;
     },
   },
