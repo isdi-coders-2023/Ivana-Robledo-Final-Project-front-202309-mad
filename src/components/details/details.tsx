@@ -64,7 +64,9 @@ export function Details() {
         <img src={currentRecipe?.img.url} alt="imagen de receta seleccionada" />
         <div>
           <div className={styles.cardName}>
-            <p className={styles.cardName}>{currentRecipe?.recipeName}</p>
+            <p className={styles.cardName} data-testid="paragraph">
+              {currentRecipe?.recipeName}
+            </p>
           </div>
           <div className={styles.ingredients}>
             <p className={styles.ingredients}>{currentRecipe?.ingredients}</p>
