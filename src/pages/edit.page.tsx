@@ -47,7 +47,6 @@ export default function EditRecipePage() {
     loadAllRecipes();
 
     Swal.fire({
-      // Position: 'top-end',
       icon: 'success',
       title: 'Tu receta ha sido modificada !!',
       showConfirmButton: false,

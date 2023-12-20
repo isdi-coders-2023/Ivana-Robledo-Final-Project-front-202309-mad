@@ -41,7 +41,6 @@ describe('Given recipes slice', (): void => {
     });
 
     test('finds the index of the recipe with the given id', () => {
-      // Arrange
       const initialState = {
         recipes: [
           { id: '1', recipeName: 'Recipe 1' },

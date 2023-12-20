@@ -20,8 +20,6 @@ export function useRecipes() {
     useSelector((state: RootState) => state.RecipesState);
   const recipesRepo = useMemo(() => new ApiRepoRecipes(token!), []);
 
-  /* Const recipesRepo = new ApiRepoRecipes(token!); */
-
   const handleDetailsPage = async (recipeItem: Recipe) => {
     dispatch(setCurrentRecipeItem(recipeItem));
   };

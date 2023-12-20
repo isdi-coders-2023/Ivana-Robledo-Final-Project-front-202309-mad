@@ -25,7 +25,7 @@ describe('Given loginThunk', () => {
     });
     test('logoutThunk should dispatch', async () => {
       await appStore.dispatch(logoutThunk());
-      expect(appStore.getState().UsersState.loggedUser).toBeNull(); // Verifica si el usuario está nulo después de hacer logout
+      expect(appStore.getState().UsersState.loggedUser).toBeNull();
     });
   });
 });

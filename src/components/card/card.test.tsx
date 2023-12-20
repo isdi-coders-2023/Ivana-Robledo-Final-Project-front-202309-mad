@@ -8,7 +8,7 @@ const mockRecipe = {
   id: '1',
   recipeName: 'Test Recipe',
   img: { url: 'http://test.com' },
-} as Recipe;
+} as unknown as Recipe;
 
 jest.mock('../../hooks/recipes.hook', () => ({
   useRecipes: () => ({ handleDetailsPage: jest.fn() }),

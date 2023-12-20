@@ -5,7 +5,6 @@ import { appStore } from '../../store/store';
 import '@testing-library/jest-dom';
 import { AppRoutes } from '../app.routes/app.routes';
 import { Header } from '../header/header';
-import { Footer } from '../footer/footer';
 
 render(
   <Router>
@@ -14,7 +13,6 @@ render(
       <div className="main-div">
         <AppRoutes></AppRoutes>
       </div>
-      <Footer></Footer>
     </Provider>
   </Router>
 );
