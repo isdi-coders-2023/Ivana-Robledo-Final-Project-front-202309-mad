@@ -4,9 +4,6 @@ import { RootState } from '../store/store';
 import styles from './main.page.module.scss';
 import { useEffect } from 'react';
 import { useRecipes } from '../hooks/recipes.hook';
-/* Import { useRecipes } from '../hooks/recipes.hook';
-import { useEffect } from 'react'; */
-
 export default function MyRecipesPage() {
   const { recipes, recipeUpdateState } = useSelector(
     (state: RootState) => state.RecipesState
