@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogoutButton } from '../logoutButton/logout.button';
 import styles from './header.module.scss';
 import { useUsers } from '../../hooks/users.hook';
 
 export function Header() {
   const { loginLoadState } = useUsers();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isProfilePage = location.pathname === '/myrecipes/';
 
   return (
     <>
@@ -28,6 +31,17 @@ export function Header() {
             <Link to={'/'}>
               <LogoutButton></LogoutButton>
             </Link>
+            <div className={styles.myRecipesLinkButton}>
+              {!isProfilePage && location.pathname !== '/myrecipes' && (
+                <button
+                  data-testid="button"
+                  className={styles.myrecipesbutton}
+                  onClick={() => navigate('/myrecipes')}
+                >
+                  Mis recetas
+                </button>
+              )}
+            </div>
           </div>
         </header>
       )}

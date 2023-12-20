@@ -3,6 +3,7 @@ import { useRecipes } from '../../hooks/recipes.hook';
 import { SyntheticEvent } from 'react';
 import styles from './recipe.form.module.scss';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function RecipeForm() {
   const navigate = useNavigate();
@@ -13,6 +14,12 @@ export default function RecipeForm() {
     const formElement = event.target as HTMLFormElement;
     const formData = new FormData(formElement);
     createRecipe(formData);
+    Swal.fire({
+      icon: 'success',
+      title: 'Tu receta ha sido creada con éxito!',
+      showConfirmButton: false,
+      timer: 1500,
+    });
     navigate('/main');
   };
 

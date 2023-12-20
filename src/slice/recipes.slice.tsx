@@ -14,7 +14,6 @@ export type RecipesState = {
   recipeState: 'idle' | 'loading' | 'loaded' | 'error';
   recipeUpdateState: 'idle' | 'loading';
   recipeDeleteState: 'idle' | 'loading' | 'deleted' | 'error';
-  recipeFilter: 'Mis recetas' | 'Galletas' | 'Tortas' | 'Todas las recetas';
 };
 
 const initialState: RecipesState = {
@@ -23,7 +22,6 @@ const initialState: RecipesState = {
   recipeState: 'idle',
   recipeUpdateState: 'idle',
   recipeDeleteState: 'idle',
-  recipeFilter: 'Todas las recetas',
 };
 
 export const recipesSlice = createSlice({

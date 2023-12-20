@@ -45,18 +45,13 @@ export function Register() {
             required
           />
           <button type="submit">Registrar</button>
-          <div className="cancel-button">
-            <Link to={'/login'}>
-              <button type="button">CANCEL</button>
-            </Link>
-          </div>
         </form>
       )}
       {hasRegister && (
         <div>
           <p>Registrado correctamente</p>
-          <div className="home-link-button">
-            <Link to={'/main'}>
+          <div className={styles.homeLinkButton}>
+            <Link to={'/'}>
               <button type="button" onClick={handleCloseOk}>
                 Continuar
               </button>
