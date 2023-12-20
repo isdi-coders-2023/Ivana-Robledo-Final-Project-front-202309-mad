@@ -23,7 +23,6 @@ const store = configureStore({
       recipeState: 'idle',
       recipeUpdateState: 'idle',
       recipeDeleteState: 'idle',
-      recipeFilter: 'Todas las recetas',
     },
   },
 });
