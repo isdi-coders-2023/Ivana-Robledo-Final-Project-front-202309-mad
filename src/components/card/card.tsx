@@ -1,4 +1,3 @@
-/* Import { Link } from 'react-router-dom'; */
 import styles from './card.module.scss';
 import { Recipe } from '../../entities/recipe';
 import { useRecipes } from '../../hooks/recipes.hook';

@@ -1,5 +1,6 @@
 .mainPageContainer {
   padding: 16px;
+  padding-top: 3em;
 }
 
 .createLinkButton {
@@ -61,6 +62,5 @@ h2 {
   overflow-y: hidden;
 }
 .listContainer::-webkit-scrollbar {
-  //display: none;
   overflow: hidden;
 }

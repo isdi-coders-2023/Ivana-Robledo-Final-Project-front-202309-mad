@@ -9,13 +9,11 @@ const mockRecipes = [
     id: '1',
     recipeName: 'Test Recipe 1',
     img: { url: 'http://test1.com' },
-    // Add other properties as needed
   },
   {
     id: '2',
     recipeName: 'Test Recipe 2',
     img: { url: 'http://test2.com' },
-    // Add other properties as needed
   },
 ] as unknown as Recipe[];
 
