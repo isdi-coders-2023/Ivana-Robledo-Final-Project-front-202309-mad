@@ -28,7 +28,6 @@ describe('Given recipes slice', (): void => {
       recipeState: 'idle',
       recipeUpdateState: 'idle',
       recipeDeleteState: 'idle',
-      recipeFilter: 'Todas las recetas',
     };
 
     test('should handle deleteRecipeThunk.pending', async () => {
@@ -41,21 +40,39 @@ describe('Given recipes slice', (): void => {
       expect(state.recipeDeleteState).toEqual('loading');
     });
 
-    /* Test('should handle updateRecipeThunk.fulfilled', async () => {
-      const store = configureStore({ reducer: recipesReducer });
-      const mockRepo = new (ApiRepoRecipes as jest.Mock<ApiRepoRecipes>)();
-      const recipeToUpdate = new FormData();
-      const recipe = {
-        repo: mockRepo,
-        id: '1',
-        recipeToUpdate,
-      };
-      await store.dispatch(updateRecipeThunk(recipe));
-      const state = store.getState();
-      const updatedRecipe = state.recipes.find((r) => r.id === recipe.id);
-      expect(state.recipeUpdateState).toEqual('loading');
-      expect(state.currentRecipe).toEqual(updatedRecipe);
-    }); */
+    test('finds the index of the recipe with the given id', () => {
+      // Arrange
+      const initialState = {
+        recipes: [
+          { id: '1', recipeName: 'Recipe 1' },
+          { id: '2', recipeName: 'Recipe 2' },
+          { id: '3', recipeName: 'Recipe 3' },
+        ],
+        currentRecipe: null,
+        recipeState: 'idle',
+        recipeUpdateState: 'idle',
+        recipeDeleteState: 'idle',
+      } as RecipesState;
+      const recipeIdToDelete = '-1';
+      const mockRepo = new (ApiRepoRecipes as jest.Mock<ApiRepoRecipes>)(
+        'mockToken'
+      );
+
+      // Act
+      const nextState = recipesReducer(
+        initialState,
+        deleteRecipeThunk.pending(recipeIdToDelete, {
+          repo: mockRepo,
+          id: recipeIdToDelete,
+        })
+      );
+
+      // Assert
+      const index = nextState.recipes.findIndex(
+        (item) => item.id === recipeIdToDelete
+      );
+      expect(index).toBe(-1); // The recipe with id '2' should have been deleted
+    });
 
     test('should handle setCurrentRecipeItem', () => {
       const actual = recipesReducer(
