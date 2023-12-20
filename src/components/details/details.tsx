@@ -19,7 +19,7 @@ export function Details() {
     deleteRecipe(currentRecipe!.id);
     Swal.fire({
       icon: 'success',
-      title: 'Tu receta ha sido eliminada exitosamente!',
+      title: 'Tu receta ha sido eliminada con éxito!',
       showConfirmButton: false,
       timer: 1500,
     });
@@ -34,7 +34,7 @@ export function Details() {
     loggedUser.email === currentRecipe.author.email;
 
   return (
-    <>
+    <div className={styles.detailsContainer}>
       <div className={styles.buttons}>
         {auth && (
           <div className={styles.deleteButtonContainer}>
@@ -74,6 +74,6 @@ export function Details() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

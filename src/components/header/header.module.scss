@@ -1,22 +1,67 @@
-.header {
-  height: 5vh;
-  background-color: rgb(158, 195, 219);
+header {
+  position: fixed;
+  width: 100%;
+  height: var(--heading-height);
   color: rgb(255, 255, 255);
   padding-inline: 1rem;
-  min-height: 15vh;
+  min-height: 5vh;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
+}
+header::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 6em;
+  width: 100%;
+  height: calc(var(--heading-height) + 10em);
+  z-index: -1;
+  transform: skewY(-3.5deg);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(https://images.unsplash.com/photo-1514517220017-8ce97a34a7b6?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+      no-repeat center,
+    linear-gradient(#4e4376, #2b5876);
+  background-size: cover;
+  border-bottom: 0.2em solid #fff;
+}
+
+.headerButtons {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.myrecipesbutton {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background-color: transparent;
+  color: #faf7f7;
+  font-size: 1rem;
+  transition: box-shadow 0.3s;
+  box-shadow: -5px 0px 10px -5px #000000;
+  &:hover {
+    box-shadow: 0px 5px 10px -5px #000000;
+  }
 }
 
 a {
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .logotipo {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1rem;
 }
 h1 {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',

@@ -44,6 +44,11 @@ figure {
   margin-top: -1px;
 }
 
+a {
+  display: flex;
+  flex-direction: column;
+}
+
 .details {
   font-weight: bold;
   width: 100%;

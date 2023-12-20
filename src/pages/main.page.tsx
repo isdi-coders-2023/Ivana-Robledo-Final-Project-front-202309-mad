@@ -1,6 +1,6 @@
 // MainPage.jsx
 
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link /* , useLocation, useNavigate */ } from 'react-router-dom';
 import { List } from '../components/list/list';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
@@ -12,9 +12,7 @@ export default function MainPage() {
   const { recipes, recipeUpdateState, recipeState } = useSelector(
     (state: RootState) => state.RecipesState
   );
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isProfilePage = location.pathname === '/myrecipes/';
+
   const { loadAllRecipes } = useRecipes();
 
   useEffect(() => {
@@ -34,20 +32,9 @@ export default function MainPage() {
         <div className={styles.createLinkButton}>
           <Link to={'/create'}>
             <button type="button" className={styles.createButton}>
-              Crea receta
+              Crear receta
             </button>
           </Link>
-        </div>
-        <div className={styles.myRecipesLinkButton}>
-          {!isProfilePage && (
-            <button
-              data-testid="button"
-              className={styles.myrecipesbutton}
-              onClick={() => navigate('/myrecipes')}
-            >
-              Mis recetas
-            </button>
-          )}
         </div>
       </div>
       <div className={styles.categoriesContainer}>
